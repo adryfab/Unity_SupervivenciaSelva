@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 95605475972406076}
   - component: {fileID: 114119366868587556}
   - component: {fileID: 61692148312065922}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: "Ara\xF1a"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
