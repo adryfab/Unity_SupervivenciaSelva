@@ -847,6 +847,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxVel: 5
   jump: 0.5
+  slider: {fileID: 1216986734}
+  txt: {fileID: 148602042}
+  energy: 100
 --- !u!1001 &355649715
 Prefab:
   m_ObjectHideFlags: 0
@@ -2311,7 +2314,7 @@ GameObject:
   - component: {fileID: 1216986733}
   - component: {fileID: 1216986734}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: sldIndio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2372,7 +2375,7 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1023391020}
   m_FillRect: {fileID: 1232009344}
   m_HandleRect: {fileID: 1023391019}
@@ -2749,7 +2752,7 @@ GameObject:
   - component: {fileID: 1338334702}
   - component: {fileID: 1338334701}
   m_Layer: 5
-  m_Name: Image
+  m_Name: imgIndio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3111,7 +3114,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1459441402
 RectTransform:
   m_ObjectHideFlags: 0

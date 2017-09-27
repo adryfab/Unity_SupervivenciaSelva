@@ -1,11 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ControladorPersonaje : MonoBehaviour
 {
     public float maxVel = 5f;
     public float jump = 1f;
+    public Slider slider;
+    public Text txt;
+    public float energy = 100f;
 
     Rigidbody2D rgb;
     Animator anim;
@@ -18,6 +22,12 @@ public class ControladorPersonaje : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+        slider.value = energy;
+        txt.text = energy.ToString();
+    }
+
     void FixedUpdate ()
     {
         float v = Input.GetAxis("Horizontal");
@@ -25,7 +35,6 @@ public class ControladorPersonaje : MonoBehaviour
         v *= maxVel;
         vel.x = v;
         rgb.velocity = vel;
-        //anim.SetFloat("speed", vel.x);
 
         if (haciaDerecha == true && v < 0)
         {
