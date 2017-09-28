@@ -16,29 +16,51 @@ public class ControlPersonaje : MonoBehaviour
     Rigidbody2D rgb;
     Animator anim;
     bool haciaDerecha = true;
-    ControlEnemigo ctrEnem;
     int golpes;
+    bool enemy = false;
+    GameObject enemigo;
+    bool enFire = false;
+    CircleCollider2D colider;
 
-    // Use this for initialization
     void Start ()
     {
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        energy = 100;
     }
 
     private void Update()
     {
         if (Mathf.Abs(Input.GetAxis("Fire1")) > 0.01f)
         {
-            anim.SetTrigger("atacar");
-            golpes++;
-            if (ctrEnem != null)
+            if (enFire == false)
             {
-                if (ctrEnem.GolpeIndio() == true)
+                enFire = true;
+                if (enemy == true)
                 {
-                    energy = energy + premioEnemigo;
+                    if (golpes >= numGolpes)
+                    {
+                        Destroy(enemigo);
+                        golpes = 0;
+                        energy += premioEnemigo;
+                        if (energy > 100)
+                        {
+                            energy = 100;
+                        }
+                    }
+                    colider = GetComponent<CircleCollider2D>();
+                    colider.enabled = false;
+                    enemy = false;
+                    golpes++;
                 }
+                anim.SetTrigger("atacar");
             }
+            else
+            {
+                enFire = false;
+            }
+
+            
         }
 
         slider.value = energy;
@@ -68,50 +90,33 @@ public class ControlPersonaje : MonoBehaviour
         {
             rgb.AddForce(new Vector2(0, jump), ForceMode2D.Impulse);
         }
-
-        //if (Mathf.Abs(Input.GetAxis("Fire1")) > 0.01f)
-        //{
-        //    anim.SetTrigger("atacar");
-        //    golpes++;
-        //    if (ctrEnem != null)
-        //    {
-        //        if (ctrEnem.GolpeIndio() == true)
-        //        {
-        //            energy = energy + premioEnemigo;
-        //        }
-        //    }
-        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "Enemy")
         {
-            //SetControlEnemigo(collision.gameObject.GetComponent<ControlEnemigo>());
-            ctrEnem = collision.gameObject.GetComponent<ControlEnemigo>();
+            enemy = true;
+            enemigo = collision.gameObject;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        //golpes++;
-        if (golpes == numGolpes)                
-        {
-            Destroy(collision.gameObject);
-        }
-
+        enemy = false;
+        enemigo = null;
     }
-
-
-    //private void SetControlEnemigo(ControlEnemigo crt)
-    //{
-    //    ctrEnem = crt;
-    //}
 
     void Flip()
     {
         var s = transform.localScale;
         s.x *= -1;
         transform.localScale = s;
+    }
+
+    public void HabilitarTrigger()
+    {
+        colider = GetComponent<CircleCollider2D>();
+        colider.enabled = true;
     }
 }
