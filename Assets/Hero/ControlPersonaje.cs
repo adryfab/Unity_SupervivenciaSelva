@@ -12,6 +12,8 @@ public class ControlPersonaje : MonoBehaviour
     public float energy = 100f;
     public int premioEnemigo = 15;
     public int numGolpes = 3;
+    public int dañoEnemigo = 3;
+    public int premioObjeto = 10;
 
     Rigidbody2D rgb;
     Animator anim;
@@ -98,6 +100,16 @@ public class ControlPersonaje : MonoBehaviour
         {
             enemy = true;
             enemigo = collision.gameObject;
+            energy = energy - dañoEnemigo;
+        }
+        if (collision.tag == "Premio")
+        {
+            energy = energy + premioObjeto;
+            if (energy > 100)
+            {
+                energy = 100;
+            }
+            Destroy(collision.gameObject);
         }
     }
 

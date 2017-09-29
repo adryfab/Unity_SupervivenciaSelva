@@ -858,6 +858,8 @@ MonoBehaviour:
   energy: 100
   premioEnemigo: 15
   numGolpes: 3
+  "da\xF1oEnemigo": 2
+  premioObjeto: 10
 --- !u!58 &340997211
 CircleCollider2D:
   m_ObjectHideFlags: 0
