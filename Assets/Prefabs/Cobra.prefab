@@ -23,8 +23,8 @@ GameObject:
   - component: {fileID: 50798717464300550}
   - component: {fileID: 61739800087953512}
   - component: {fileID: 95276665777844986}
-  - component: {fileID: 114680791901369172}
   - component: {fileID: 61467987479258968}
+  - component: {fileID: 114765401441033480}
   m_Layer: 8
   m_Name: Cobra
   m_TagString: Enemy
@@ -132,7 +132,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114680791901369172
+--- !u!114 &114765401441033480
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2849a7593be22e4983a9e3f911822ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vel: -1
+  vel: 1
 --- !u!212 &212874678486858782
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -178,7 +178,7 @@ SpriteRenderer:
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300018, guid: 65521fdf92871644885526e31c43c9e8, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
+  m_FlipX: 1
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 0.83, y: 0.9}

@@ -5,7 +5,10 @@ using UnityEngine;
 public class ControladorCobra : MonoBehaviour
 {
     public float vel = -1f;
+    public float maxVel = 5f;
+
     Rigidbody2D rb;
+    bool haciaDerecha = true;
 
     // Use this for initialization
     void Start ()

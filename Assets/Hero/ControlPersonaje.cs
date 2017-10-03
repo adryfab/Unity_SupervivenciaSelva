@@ -42,7 +42,8 @@ public class ControlPersonaje : MonoBehaviour
                 {
                     if (golpes >= numGolpes)
                     {
-                        Destroy(enemigo);
+                        enemigo.GetComponent<Animator>().SetTrigger("morir");
+                        Destroy(enemigo,1);
                         golpes = 0;
                         energy += premioEnemigo;
                         if (energy > 100)
@@ -60,13 +61,14 @@ public class ControlPersonaje : MonoBehaviour
             else
             {
                 enFire = false;
-            }
-
-            
+            }                       
         }
-
         slider.value = energy;
         txt.text = energy.ToString();
+        if (energy <= 0)
+        {
+            anim.SetTrigger("morir");
+        }
     }
 
     void FixedUpdate ()
@@ -91,6 +93,7 @@ public class ControlPersonaje : MonoBehaviour
         if (Input.GetAxis("Jump") > 0)
         {
             rgb.AddForce(new Vector2(0, jump), ForceMode2D.Impulse);
+            anim.SetTrigger("saltar");
         }
     }
 
@@ -101,6 +104,11 @@ public class ControlPersonaje : MonoBehaviour
             enemy = true;
             enemigo = collision.gameObject;
             energy = energy - dañoEnemigo;
+            anim.SetTrigger("hit");
+            if (energy < 0)
+            {
+                energy = 0;
+            }
         }
         if (collision.tag == "Premio")
         {
