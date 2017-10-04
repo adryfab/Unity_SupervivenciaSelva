@@ -5,12 +5,15 @@ using UnityEngine;
 public class ControladorAraña : MonoBehaviour
 {
     public float vel = -1f;
+
     Rigidbody2D rb;
+    SpriteRenderer rend;
 
     // Use this for initialization
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
+        rend = GetComponent<SpriteRenderer>();
     }
 	
 	void FixedUpdate()
@@ -25,5 +28,23 @@ public class ControladorAraña : MonoBehaviour
         var s = transform.localScale;
         s.x *= -1;
         transform.localScale = s;
+    }
+
+    public void RecibirGolpe(int golpes)
+    {
+        switch (golpes)
+        {
+            case 1:
+                //rend.color = new Color(1f / 242, 1f / 155, 1f / 155);
+                rend.color = new Color(0, 0, 1, 1); //blue
+                break;
+            case 2:
+                //rend.color = new Color(1f / 216, 1f / 10, 1f / 10);
+                rend.color = new Color(0, 0, 0, 1); //black
+                break;
+            default:
+                rend.color = new Color(0, 0, 0, 1); //black
+                break;
+        }
     }
 }

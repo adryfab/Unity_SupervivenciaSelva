@@ -42,7 +42,6 @@ public class ControlPersonaje : MonoBehaviour
                 {
                     if (golpes >= numGolpes)
                     {
-                        enemigo.GetComponent<Animator>().SetTrigger("morir");
                         Destroy(enemigo,1);
                         golpes = 0;
                         energy += premioEnemigo;
@@ -51,6 +50,30 @@ public class ControlPersonaje : MonoBehaviour
                             energy = 100;
                         }
                     }
+                    if (enemigo.gameObject.name.Equals("Cobra"))
+                    {
+                        ControladorCobra ctr = enemigo.GetComponent<ControladorCobra>();
+                        if (ctr != null)
+                        {
+                            ctr.RecibirGolpe(golpes);
+                        }
+                    } else if (enemigo.gameObject.name.Equals("Araña"))
+                    {
+                        ControladorAraña ctr = enemigo.GetComponent<ControladorAraña>();
+                        if (ctr != null)
+                        {
+                            ctr.RecibirGolpe(golpes);
+                        }
+                    }
+                    else if (enemigo.gameObject.name.Equals("Mono"))
+                    {
+                        ControladorMono ctr = enemigo.GetComponent<ControladorMono>();
+                        if (ctr != null)
+                        {
+                            ctr.RecibirGolpe(golpes);
+                        }
+                    }
+
                     colider = GetComponent<CircleCollider2D>();
                     colider.enabled = false;
                     enemy = false;
@@ -61,7 +84,7 @@ public class ControlPersonaje : MonoBehaviour
             else
             {
                 enFire = false;
-            }                       
+            }
         }
         slider.value = energy;
         txt.text = energy.ToString();
@@ -103,12 +126,12 @@ public class ControlPersonaje : MonoBehaviour
         {
             enemy = true;
             enemigo = collision.gameObject;
-            energy = energy - dañoEnemigo;
-            anim.SetTrigger("hit");
-            if (energy < 0)
-            {
-                energy = 0;
-            }
+            //energy = energy - dañoEnemigo;
+            //anim.SetTrigger("hit");
+            //if (energy < 0)
+            //{
+            //    energy = 0;
+            //}
         }
         if (collision.tag == "Premio")
         {
@@ -118,6 +141,21 @@ public class ControlPersonaje : MonoBehaviour
                 energy = 100;
             }
             Destroy(collision.gameObject);
+        }
+    }
+
+    public void RecibirDaño(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+        {
+            enemy = true;
+            enemigo = collision.gameObject;
+            energy = energy - dañoEnemigo;
+            anim.SetTrigger("hit");
+            if (energy < 0)
+            {
+                energy = 0;
+            }
         }
     }
 

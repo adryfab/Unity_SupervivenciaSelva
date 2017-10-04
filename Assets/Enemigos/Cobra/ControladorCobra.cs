@@ -6,17 +6,38 @@ public class ControladorCobra : MonoBehaviour
 {
     public float vel = -1f;
     public float maxVel = 5f;
+    public GameObject bulletPrototype;
+    public int tiempoProyectil = 100;
 
     Rigidbody2D rb;
-    bool haciaDerecha = true;
+    //bool haciaDerecha = true;
+    bool emitidoProyectil = false;
+    int cuentaProyectil;
+    SpriteRenderer rend;
 
     // Use this for initialization
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
+        rend = GetComponent<SpriteRenderer>();
     }
-	
-	void FixedUpdate()
+
+    private void Update()
+    {
+        if (emitidoProyectil == false && cuentaProyectil == tiempoProyectil)
+        {
+            EmitirProyectil();
+            emitidoProyectil = true;
+            cuentaProyectil = 0;
+        }
+        else
+        {
+            emitidoProyectil = false;
+            cuentaProyectil++;
+        }
+    }
+
+    void FixedUpdate()
     {
         Vector2 v = new Vector2(vel, 0);
         rb.velocity = v;
@@ -28,5 +49,30 @@ public class ControladorCobra : MonoBehaviour
         var s = transform.localScale;
         s.x *= -1;
         transform.localScale = s;
+    }
+
+    public void EmitirProyectil()
+    {
+        GameObject bulletCopy = Instantiate(bulletPrototype);
+        bulletCopy.transform.position = new Vector3(transform.position.x, transform.position.y, -1f);
+        bulletCopy.GetComponent<ControlProyectil>().direction = new Vector3(transform.localScale.x * -1, 0, 0);
+    }
+
+    public void RecibirGolpe(int golpes)
+    {
+        switch (golpes)
+        {
+            case 1:
+                //rend.color = new Color(1f / 242, 1f / 155, 1f / 155);
+                rend.color = new Color(0, 0, 1, 1); //blue
+                break;
+            case 2:
+                //rend.color = new Color(1f / 216, 1f / 10, 1f / 10);
+                rend.color = new Color(0, 0, 0, 1); //black
+                break;
+            default:
+                rend.color = new Color(0, 0, 0, 1); //black
+                break;
+        }
     }
 }
