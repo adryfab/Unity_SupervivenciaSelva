@@ -12,7 +12,7 @@ public class ControlPersonaje : MonoBehaviour
     public float energy = 100f;
     public int premioEnemigo = 15;
     public int numGolpes = 3;
-    public int dañoEnemigo = 3;
+    public int dañoEnemigo = 1;
     public int premioObjeto = 10;
 
     Rigidbody2D rgb;
@@ -126,12 +126,12 @@ public class ControlPersonaje : MonoBehaviour
         {
             enemy = true;
             enemigo = collision.gameObject;
-            //energy = energy - dañoEnemigo;
-            //anim.SetTrigger("hit");
-            //if (energy < 0)
-            //{
-            //    energy = 0;
-            //}
+            energy = energy - dañoEnemigo;
+            anim.SetTrigger("hit");
+            if (energy < 0)
+            {
+                energy = 0;
+            }
         }
         if (collision.tag == "Premio")
         {
@@ -148,8 +148,8 @@ public class ControlPersonaje : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            enemy = true;
-            enemigo = collision.gameObject;
+            //enemy = true;
+            //enemigo = collision.gameObject;
             energy = energy - dañoEnemigo;
             anim.SetTrigger("hit");
             if (energy < 0)

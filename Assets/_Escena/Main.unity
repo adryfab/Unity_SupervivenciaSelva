@@ -348,7 +348,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4595838082034290, guid: a0663be5d093ce3438bb93a95977ee08, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 4.358
+      value: 4.07
       objectReference: {fileID: 0}
     - target: {fileID: 4595838082034290, guid: a0663be5d093ce3438bb93a95977ee08, type: 2}
       propertyPath: m_LocalPosition.y
@@ -849,7 +849,7 @@ MonoBehaviour:
   energy: 100
   premioEnemigo: 15
   numGolpes: 3
-  "da\xF1oEnemigo": 2
+  "da\xF1oEnemigo": 1
   premioObjeto: 10
 --- !u!58 &340997211
 CircleCollider2D:
@@ -3735,7 +3735,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4176830790911524, guid: 7621b79609353b948a6067b00183ed6f, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.27488136
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 4176830790911524, guid: 7621b79609353b948a6067b00183ed6f, type: 2}
       propertyPath: m_LocalPosition.y

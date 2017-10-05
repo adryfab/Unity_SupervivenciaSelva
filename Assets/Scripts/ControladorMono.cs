@@ -35,15 +35,13 @@ public class ControladorMono : MonoBehaviour {
         switch (golpes)
         {
             case 1:
-                //rend.color = new Color(1f / 242, 1f / 155, 1f / 155);
                 rend.color = new Color(0, 0, 1, 1); //blue
                 break;
             case 2:
-                //rend.color = new Color(1f / 216, 1f / 10, 1f / 10);
                 rend.color = new Color(0, 0, 0, 1); //black
                 break;
             default:
-                rend.color = new Color(0, 0, 0, 1); //black
+                rend.color = new Color(1, 0, 0, 1); //red
                 break;
         }
     }

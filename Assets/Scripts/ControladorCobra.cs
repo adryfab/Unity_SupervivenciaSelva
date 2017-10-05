@@ -10,12 +10,10 @@ public class ControladorCobra : MonoBehaviour
     public int tiempoProyectil = 100;
 
     Rigidbody2D rb;
-    //bool haciaDerecha = true;
     bool emitidoProyectil = false;
     int cuentaProyectil;
     SpriteRenderer rend;
 
-    // Use this for initialization
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -63,15 +61,13 @@ public class ControladorCobra : MonoBehaviour
         switch (golpes)
         {
             case 1:
-                //rend.color = new Color(1f / 242, 1f / 155, 1f / 155);
                 rend.color = new Color(0, 0, 1, 1); //blue
                 break;
             case 2:
-                //rend.color = new Color(1f / 216, 1f / 10, 1f / 10);
                 rend.color = new Color(0, 0, 0, 1); //black
                 break;
             default:
-                rend.color = new Color(0, 0, 0, 1); //black
+                rend.color = new Color(1, 0, 0, 1); //red
                 break;
         }
     }
