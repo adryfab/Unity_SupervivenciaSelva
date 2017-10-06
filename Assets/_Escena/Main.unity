@@ -3218,6 +3218,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114765401441033480, guid: a0663be5d093ce3438bb93a95977ee08,
+        type: 2}
+      propertyPath: retroalimentacionEnergiaPrefab
+      value: 
+      objectReference: {fileID: 107250, guid: 3c7e9467b25f4e749a1e7052880f6e8d, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0663be5d093ce3438bb93a95977ee08, type: 2}
   m_IsPrefabParent: 0

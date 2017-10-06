@@ -8,16 +8,19 @@ public class ControladorCobra : MonoBehaviour
     public float maxVel = 5f;
     public GameObject bulletPrototype;
     public int tiempoProyectil = 100;
+    //public GameObject retroalimentacionEnergiaPrefab;
 
     Rigidbody2D rb;
     bool emitidoProyectil = false;
     int cuentaProyectil;
     SpriteRenderer rend;
+    //Transform retroalimentacionSpawnPoint;
 
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
+        //retroalimentacionSpawnPoint = GameObject.Find("spawnPoint").transform;
     }
 
     private void Update()
@@ -71,4 +74,5 @@ public class ControladorCobra : MonoBehaviour
                 break;
         }
     }
+
 }
