@@ -15,6 +15,7 @@ public class ControlPersonaje : MonoBehaviour
     public int dañoEnemigo = 1;
     public int premioObjeto = 10;
     public bool isOnTheFloor = false;
+    public GameObject retroalimentacionEnergiaPrefab;
 
     Rigidbody2D rgb;
     Animator anim;
@@ -24,12 +25,14 @@ public class ControlPersonaje : MonoBehaviour
     GameObject enemigo;
     bool enFire = false;
     CircleCollider2D colider;
+    Transform retroalimentacionSpawnPoint;
 
     void Start ()
     {
         rgb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         energy = 100;
+        retroalimentacionSpawnPoint = GameObject.Find("spawnPoint").transform;
     }
 
     private void Update()
@@ -46,6 +49,7 @@ public class ControlPersonaje : MonoBehaviour
                         Destroy(enemigo,1);
                         golpes = 0;
                         energy += premioEnemigo;
+                        InstanciarRetroalimentacionEnergia(premioEnemigo);
                         if (energy > 100)
                         {
                             energy = 100;
@@ -132,6 +136,7 @@ public class ControlPersonaje : MonoBehaviour
             enemy = true;
             enemigo = collision.gameObject;
             energy = energy - dañoEnemigo;
+            InstanciarRetroalimentacionEnergia(dañoEnemigo * -1);
             anim.SetTrigger("hit");
             if (energy < 0)
             {
@@ -141,6 +146,7 @@ public class ControlPersonaje : MonoBehaviour
         if (collision.tag == "Premio")
         {
             energy = energy + premioObjeto;
+            InstanciarRetroalimentacionEnergia(premioObjeto);
             if (energy > 100)
             {
                 energy = 100;
@@ -153,9 +159,8 @@ public class ControlPersonaje : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            //enemy = true;
-            //enemigo = collision.gameObject;
             energy = energy - dañoEnemigo;
+            InstanciarRetroalimentacionEnergia(dañoEnemigo * -1);
             anim.SetTrigger("hit");
             if (energy < 0)
             {
@@ -182,4 +187,21 @@ public class ControlPersonaje : MonoBehaviour
         colider = GetComponent<CircleCollider2D>();
         colider.enabled = true;
     }
+
+    private void InstanciarRetroalimentacionEnergia(int incremento)
+    {
+        GameObject retroalimentcionGO = null;
+        if (retroalimentacionSpawnPoint != null)
+        {
+            retroalimentcionGO = (GameObject)Instantiate(retroalimentacionEnergiaPrefab, retroalimentacionSpawnPoint.position,
+                retroalimentacionSpawnPoint.rotation);
+        }
+        else
+        {
+            retroalimentcionGO = (GameObject)Instantiate(retroalimentacionEnergiaPrefab, transform.position, transform.rotation);
+        }
+
+        retroalimentcionGO.GetComponent<RetroalimentacionEnergia>().cantidadCambiodeEnergia = incremento;
+    }
+
 }
