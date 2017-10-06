@@ -14,6 +14,7 @@ public class ControlPersonaje : MonoBehaviour
     public int numGolpes = 3;
     public int dañoEnemigo = 1;
     public int premioObjeto = 10;
+    public bool isOnTheFloor = false;
 
     Rigidbody2D rgb;
     Animator anim;
@@ -113,7 +114,11 @@ public class ControlPersonaje : MonoBehaviour
             Flip();
         }
 
-        if (Input.GetAxis("Jump") > 0)
+        // Nueva variable agregada para corregir el error del salto infinito
+        isOnTheFloor = rgb.velocity.y == 0;
+
+        // ahora solo puede saltar si la velocidad del RGB es 0 en su componente 'y' es decir que no este cayendo o subiendo.
+        if (Input.GetAxis("Jump") > 0 && isOnTheFloor)
         {
             rgb.AddForce(new Vector2(0, jump), ForceMode2D.Impulse);
             anim.SetTrigger("saltar");
