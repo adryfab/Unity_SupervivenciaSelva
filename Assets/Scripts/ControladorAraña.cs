@@ -5,18 +5,21 @@ using UnityEngine;
 public class ControladorAraña : MonoBehaviour
 {
     public float vel = -1f;
+    public AudioClip spiderAudio;
 
     Rigidbody2D rb;
     SpriteRenderer rend;
+    AudioSource aSource;
 
     // Use this for initialization
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
+        aSource = GetComponent<AudioSource>();
     }
-	
-	void FixedUpdate()
+
+    void FixedUpdate()
     {
         Vector2 v = new Vector2(vel, 0);
         rb.velocity = v;
@@ -42,6 +45,7 @@ public class ControladorAraña : MonoBehaviour
                 break;
             default:
                 rend.color = new Color(1, 0, 0, 1); //red
+                aSource.PlayOneShot(spiderAudio);
                 break;
         }
     }

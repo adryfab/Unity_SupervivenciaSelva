@@ -5,15 +5,18 @@ using UnityEngine;
 public class ControladorMono : MonoBehaviour {
 
     public float vel = -1f;
+    public AudioClip monkeyAudio;
 
     Rigidbody2D rb;
     SpriteRenderer rend;
+    AudioSource aSource;
 
     // Use this for initialization
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
+        aSource = GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -42,6 +45,7 @@ public class ControladorMono : MonoBehaviour {
                 break;
             default:
                 rend.color = new Color(1, 0, 0, 1); //red
+                aSource.PlayOneShot(monkeyAudio);
                 break;
         }
     }

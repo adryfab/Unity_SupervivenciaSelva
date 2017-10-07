@@ -16,7 +16,8 @@ public class ControlPersonaje : MonoBehaviour
     public int premioObjeto = 10;
     public bool isOnTheFloor = false;
     public GameObject retroalimentacionEnergiaPrefab;
-
+    public AudioClip ouch;
+    
     Rigidbody2D rgb;
     Animator anim;
     bool haciaDerecha = true;
@@ -27,6 +28,7 @@ public class ControlPersonaje : MonoBehaviour
     CircleCollider2D colider;
     Transform retroalimentacionSpawnPoint;
     ControlEscena ctrEscena;
+    AudioSource aSource;
 
     void Start ()
     {
@@ -35,6 +37,7 @@ public class ControlPersonaje : MonoBehaviour
         energy = 100;
         retroalimentacionSpawnPoint = GameObject.Find("spawnPoint").transform;
         ctrEscena = GameObject.Find("Escena").GetComponent<ControlEscena>();
+        aSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -141,6 +144,7 @@ public class ControlPersonaje : MonoBehaviour
             enemigo = collision.gameObject;
             energy = energy - dañoEnemigo;
             InstanciarRetroalimentacionEnergia(dañoEnemigo * -1);
+            aSource.PlayOneShot(ouch);
             anim.SetTrigger("hit");
             if (energy < 0)
             {
@@ -165,6 +169,7 @@ public class ControlPersonaje : MonoBehaviour
         {
             energy = energy - dañoEnemigo;
             InstanciarRetroalimentacionEnergia(dañoEnemigo * -1);
+            aSource.PlayOneShot(ouch);
             anim.SetTrigger("hit");
             if (energy < 0)
             {

@@ -8,19 +8,19 @@ public class ControladorCobra : MonoBehaviour
     public float maxVel = 5f;
     public GameObject bulletPrototype;
     public int tiempoProyectil = 100;
-    //public GameObject retroalimentacionEnergiaPrefab;
+    public AudioClip snakeAudio;
 
     Rigidbody2D rb;
     bool emitidoProyectil = false;
     int cuentaProyectil;
     SpriteRenderer rend;
-    //Transform retroalimentacionSpawnPoint;
+    AudioSource aSource;
 
     void Start ()
     {
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
-        //retroalimentacionSpawnPoint = GameObject.Find("spawnPoint").transform;
+        aSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -71,6 +71,7 @@ public class ControladorCobra : MonoBehaviour
                 break;
             default:
                 rend.color = new Color(1, 0, 0, 1); //red
+                aSource.PlayOneShot(snakeAudio);
                 break;
         }
     }
