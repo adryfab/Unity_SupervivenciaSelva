@@ -26,6 +26,7 @@ public class ControlPersonaje : MonoBehaviour
     bool enFire = false;
     CircleCollider2D colider;
     Transform retroalimentacionSpawnPoint;
+    ControlEscena ctrEscena;
 
     void Start ()
     {
@@ -33,6 +34,7 @@ public class ControlPersonaje : MonoBehaviour
         anim = GetComponent<Animator>();
         energy = 100;
         retroalimentacionSpawnPoint = GameObject.Find("spawnPoint").transform;
+        ctrEscena = GameObject.Find("Escena").GetComponent<ControlEscena>();
     }
 
     private void Update()
@@ -96,6 +98,7 @@ public class ControlPersonaje : MonoBehaviour
         if (energy <= 0)
         {
             anim.SetTrigger("morir");
+            ctrEscena.RegistrarFin();
         }
     }
 
@@ -121,7 +124,8 @@ public class ControlPersonaje : MonoBehaviour
         // Nueva variable agregada para corregir el error del salto infinito
         isOnTheFloor = rgb.velocity.y == 0;
 
-        // ahora solo puede saltar si la velocidad del RGB es 0 en su componente 'y' es decir que no este cayendo o subiendo.
+        // ahora solo puede saltar si la velocidad del RGB es 0 en su componente 'y' 
+        //es decir que no este cayendo o subiendo.
         if (Input.GetAxis("Jump") > 0 && isOnTheFloor)
         {
             rgb.AddForce(new Vector2(0, jump), ForceMode2D.Impulse);
@@ -193,12 +197,13 @@ public class ControlPersonaje : MonoBehaviour
         GameObject retroalimentcionGO = null;
         if (retroalimentacionSpawnPoint != null)
         {
-            retroalimentcionGO = (GameObject)Instantiate(retroalimentacionEnergiaPrefab, retroalimentacionSpawnPoint.position,
-                retroalimentacionSpawnPoint.rotation);
+            retroalimentcionGO = (GameObject)Instantiate(retroalimentacionEnergiaPrefab, 
+                retroalimentacionSpawnPoint.position, retroalimentacionSpawnPoint.rotation);
         }
         else
         {
-            retroalimentcionGO = (GameObject)Instantiate(retroalimentacionEnergiaPrefab, transform.position, transform.rotation);
+            retroalimentcionGO = (GameObject)Instantiate(retroalimentacionEnergiaPrefab, 
+                transform.position, transform.rotation);
         }
 
         retroalimentcionGO.GetComponent<RetroalimentacionEnergia>().cantidadCambiodeEnergia = incremento;
