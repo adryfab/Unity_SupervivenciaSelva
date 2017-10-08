@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ControlPersonaje : MonoBehaviour
 {
@@ -29,6 +30,9 @@ public class ControlPersonaje : MonoBehaviour
     Transform retroalimentacionSpawnPoint;
     ControlEscena ctrEscena;
     AudioSource aSource;
+    GameObject cobra;
+    GameObject araña;
+    GameObject mono;
 
     void Start ()
     {
@@ -102,6 +106,18 @@ public class ControlPersonaje : MonoBehaviour
         {
             anim.SetTrigger("morir");
             ctrEscena.RegistrarFin();
+            SceneManager.UnloadSceneAsync("Main");
+            SceneManager.LoadScene("Final", LoadSceneMode.Additive);
+        }
+
+        //Obteniendo un objeto de cada enemigo
+        cobra = GameObject.Find("Cobra");
+        araña = GameObject.Find("Araña");
+        mono = GameObject.Find("Mono");
+        if (cobra == null && araña == null && mono == null)
+        {
+            SceneManager.UnloadSceneAsync("Main");
+            SceneManager.LoadScene("Final", LoadSceneMode.Additive);
         }
     }
 
